@@ -10,8 +10,6 @@ This program should be executed from the command line, in the following manner:
 
 `node download_avatars.js jquery jquery`
 
-... (whatever else you'd like to include)
-
 # Functional Requirements
  As an open source project leader,
  I want a folder with the avatars of all of my github project's contributors 
