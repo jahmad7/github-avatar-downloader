@@ -10,7 +10,21 @@ var fs = require ("fs");
 
 //use the request module to GET the list of contrubtors for the given repo
 function getRepoContributors(repoOwner, repoName, callback){
-    
+
+    //object to store the information needed for the get request 
+    var options = {
+        url : "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
+
+        //case sensative information passed into the request header
+        headers: {
+            'User-Agent': 'request',
+            'Authorization': 'token 854d9c9f72a050ef7838f09cebdc7c194064f057'
+        }
+    };
+
+    request(options, function(error, response, body){
+        callback(JSON.parse(body));
+    });
 }
 
 
@@ -19,5 +33,5 @@ getRepoContributors("jquery", "jquery", function(err, result){
     if (err){
         console.log(err);
     }
-    console.log(result);
+    console.log(err, result);
 })

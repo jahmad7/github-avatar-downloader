@@ -1,0 +1,4 @@
+//PERSONAL INFORMATION NOT SHARED 
+module.exports = {
+    GITHUB_TOKEN: "854d9c9f72a050ef7838f09cebdc7c194064f057"
+};
