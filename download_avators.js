@@ -34,21 +34,6 @@ function getRepoContributors(repoOwner, repoName, callback){
     });
 }
 
-
-//run the function get the list we need for the username as well as user pictures from JSON API for github
-getRepoContributors(process.argv.slice(2)[0], process.argv.slice(2)[1], function(err, result){
-
-    //make sure there are no errors being thrown
-    if (err){
-        console.log(err);
-    }
-    //iterate through the object to get the URLS for images we want and assign the login of each user as the image name  
-    for(var user of result){
-
-        downloadImageByURL(user.avatar_url, "./Avatars/"+user.login )
-    }
-})
-
 //downloads the pictures of the users and renames them to their username.extension 
 function downloadImageByURL(url,filePath){
 
@@ -63,4 +48,22 @@ function downloadImageByURL(url,filePath){
 
 }
 
-downloadImageByURL("https://avatars0.githubusercontent.com/u/3485?v=4","./Avatars/")
+//make sure the user enter information for the repos 
+if (process.argv.length < 4){
+    throw ("Please enter repo owner as well as repo name after node command");
+}
+
+
+//run the function get the list we need for the username as well as user pictures from JSON API for github
+getRepoContributors(process.argv.slice(2)[0], process.argv.slice(2)[1], function(err, result){
+
+    //make sure there are no errors being thrown
+    if (err){
+        console.log(err);
+    }
+    //iterate through the object to get the URLS for images we want and assign the login of each user as the image name  
+    for(var user of result){
+
+        downloadImageByURL(user.avatar_url, "./Avatars/"+user.login )
+    }
+})
