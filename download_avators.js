@@ -3,7 +3,7 @@
 //application used to download the avators of github users based on in command line provided username and repository
 //for example node download_avators.js nodejs node
 
-
+//modules
 var request = require("request");
 var fs = require ("fs");
 var gitInfrmation = require("./noncommit");
@@ -35,7 +35,7 @@ function getRepoContributors(repoOwner, repoName, callback){
 }
 
 //downloads the pictures of the users and renames them to their username.extension 
-function downloadImageByURL(url,filePath){
+function downloadImageByURL(url, filePath){
 
     request.get(url)
     .on('error', function(err){
