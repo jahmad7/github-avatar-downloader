@@ -7,6 +7,7 @@
 var request = require("request");
 var fs = require ("fs");
 var gitInfrmation = require("./noncommit");
+var http = require("http");
 
 
 //use the request module to GET the list of contrubtors for the given repo
@@ -34,14 +35,32 @@ function getRepoContributors(repoOwner, repoName, callback){
 }
 
 
-//run the function get the list we need 
+//run the function get the list we need for the username as well as user pictures from JSON API for github
 getRepoContributors("jquery", "jquery", function(err, result){
+
     //make sure there are no errors being thrown
     if (err){
         console.log(err);
     }
-    //iterate through the object to get the values we want 
+    //iterate through the object to get the URLS for images we want and assign the login of each user as the image name  
     for(var user of result){
-        console.log(user.avatar_url);
+
+        downloadImageByURL(user.avatar_url, "./Avatars/"+user.login )
     }
 })
+
+//downloads the pictures of the users and renames them to their username.extension 
+function downloadImageByURL(url,filePath){
+
+    request.get(url)
+    .on('error', function(err){
+        throw err;
+    })
+    .on('response', function(response){
+        console.log(response.statusCode);
+    })
+    .pipe(fs.createWriteStream(filePath + ".png"));
+
+}
+
+downloadImageByURL("https://avatars0.githubusercontent.com/u/3485?v=4","./Avatars/")
