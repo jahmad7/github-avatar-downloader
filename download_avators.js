@@ -36,7 +36,7 @@ function getRepoContributors(repoOwner, repoName, callback){
 
 
 //run the function get the list we need for the username as well as user pictures from JSON API for github
-getRepoContributors("jquery", "jquery", function(err, result){
+getRepoContributors(process.argv.slice(2)[0], process.argv.slice(2)[1], function(err, result){
 
     //make sure there are no errors being thrown
     if (err){
